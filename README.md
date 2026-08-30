@@ -1,5 +1,56 @@
 # Dashboard IoT — Ambiente de Desenvolvimento
 
+## Motivação
+
+Este projeto surgiu da necessidade de tornar mais rápido e confortável o desenvolvimento da interface visual da dashboard IoT.
+
+Desenvolver diretamente dentro do nó `ui-template` do Node-RED torna o processo de criação e refatoração pouco prático. Cada alteração no HTML, CSS ou JavaScript exige, repetidamente, realizar o deploy no Node-RED e posteriormente atualizar a página da dashboard para visualizar o resultado.
+
+Durante a construção de interfaces mais elaboradas, esse ciclo se torna especialmente cansativo:
+
+```text
+Editar código no ui-template
+        │
+        ▼
+      Deploy
+        │
+        ▼
+Atualizar a página
+        │
+        ▼
+Visualizar resultado
+        │
+        ▼
+Encontrar algo para corrigir
+        │
+        └──────────────► repetir
+```
+
+Além disso, manter HTML, CSS e JavaScript dentro de um único nó dificulta a organização, a leitura, a manutenção e a utilização dos recursos disponíveis no VS Code.
+
+Este projeto foi criado para separar o **desenvolvimento da interface** da sua futura **implantação no Node-RED**.
+
+O desenvolvimento passa a ocorrer em arquivos independentes, utilizando o VS Code e Vite, com atualização automática da interface no navegador após salvar as alterações.
+
+```text
+VS Code
+   │
+   ├── HTML
+   ├── CSS
+   ├── JavaScript
+   └── SVG
+        │
+        ▼
+      Vite
+        │
+        ├── PC
+        └── Smartphone
+```
+
+Somente após a interface estar desenvolvida e testada ela será preparada para utilização no `ui-template` do Node-RED.
+
+---
+
 ## Objetivo
 
 Este projeto é o ambiente de desenvolvimento da interface visual da futura dashboard IoT.
@@ -40,6 +91,7 @@ dashboard/
 ├── package.json
 ├── Dockerfile
 ├── docker-compose.yml
+├── .gitignore
 └── README.md
 ```
 
@@ -69,7 +121,7 @@ Docker
 
 Os arquivos do projeto são disponibilizados ao container através de um **bind mount**.
 
-Dessa forma, os arquivos continuam no PC e podem ser editados normalmente pelo VS Code, enquanto o Vite os utiliza diretamente dentro do container.
+Dessa forma, os arquivos permanecem no PC e podem ser editados normalmente pelo VS Code, enquanto o Vite os utiliza diretamente dentro do container.
 
 As dependências do Node/Vite são mantidas em um volume Docker separado.
 
@@ -89,7 +141,7 @@ Verificar o container:
 docker compose ps
 ```
 
-O serviço deverá estar disponível na porta `5173`.
+O serviço estará disponível na porta `5173`.
 
 ---
 
@@ -131,16 +183,34 @@ Arquivos principais:
 
 ```text
 index.html
+
 css/dashboard.css
+
 js/dashboard.js
 js/svg.js
 js/mqtt.js
+
 svg/caixa-agua.svg
 ```
 
 Ao salvar uma alteração, o Vite detecta a modificação e atualiza a visualização nos navegadores.
 
-Dessa forma, não é necessário copiar o código para o Node-RED nem executar um deploy a cada alteração.
+Dessa forma, não é necessário copiar o código para o Node-RED, executar um deploy ou atualizar manualmente a dashboard a cada alteração.
+
+O fluxo de desenvolvimento passa a ser:
+
+```text
+Editar
+  │
+  ▼
+Salvar
+  │
+  ▼
+Vite detecta a alteração
+  │
+  ▼
+PC + Smartphone atualizados
+```
 
 ---
 
@@ -176,39 +246,6 @@ Alterações nos arquivos HTML, CSS, JavaScript e SVG normalmente **não exigem 
 
 O `ui-template` será utilizado somente posteriormente, quando a interface estiver suficientemente desenvolvida e testada.
 
-Durante o desenvolvimento:
-
-```text
-HTML
-CSS
-JavaScript
-SVG
-   │
-   ▼
-Vite
-   │
-   ▼
-PC + Smartphone
-```
-
-Na fase de implantação:
-
-```text
-HTML
-CSS
-JavaScript
-SVG
-   │
-   ▼
-processo de empacotamento
-   │
-   ▼
-conteúdo compatível com ui-template
-   │
-   ▼
-Node-RED
-```
-
 O objetivo futuro é automatizar esse empacotamento para que os arquivos separados do projeto sejam transformados em um único conteúdo compatível com o `ui-template`, sem necessidade de reorganização ou cópia manual do código.
 
 A estrutura do código-fonte deve, portanto, permanecer separada durante todo o desenvolvimento.
@@ -221,16 +258,7 @@ O Node-RED não será utilizado como ambiente principal de desenvolvimento visua
 
 Ele será utilizado posteriormente como ambiente de integração e execução da dashboard.
 
-A interface será desenvolvida primeiro utilizando:
-
-```text
-VS Code + HTML + CSS + JavaScript + SVG + Vite + Docker
-```
-
-e posteriormente integrada à infraestrutura:
-
-```text
-Node-RED + ui-template + MQTT
-```
-
 Essa separação permite desenvolver, testar e refatorar a interface rapidamente antes de conectá-la à infraestrutura IoT.
+
+O objetivo é que as limitações do `ui-template` sejam tratadas somente na etapa de implantação, mantendo o código-fonte organizado e adequado ao desenvolvimento durante todo o processo.
+
