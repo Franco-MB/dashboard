@@ -1,0 +1,49 @@
+services:
+
+  dashboard-dev:
+
+    # Imagem criada a partir do Dockerfile deste projeto.
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: dashboard-vite
+
+    # Todos os caminhos relativos utilizados pelo Vite
+    # serão considerados a partir desta pasta.
+    working_dir: /app
+
+    volumes:
+
+      # Bind mount:
+      # os arquivos editados no PC ficam imediatamente
+      # disponíveis dentro do container.
+      - ./:/app
+
+      # Mantém o node_modules dentro de um volume Docker.
+      # Assim ele não precisa existir fisicamente no PC
+      # e não é sobrescrito pelo bind mount acima.
+      - node_modules:/app/node_modules
+
+    ports:
+
+      # PC:5173  →  Container:5173
+      #
+      # A publicação da porta também permite que outros
+      # dispositivos da mesma rede acessem o Vite.
+      - "5173:5173"
+
+    environment:
+
+      # Ajuda o Vite a detectar alterações feitas nos
+      # arquivos através do bind mount.
+      - CHOKIDAR_USEPOLLING=true
+
+    restart: unless-stopped
+
+
+volumes:
+
+  # Volume utilizado exclusivamente pelas dependências
+  # Node/Vite instaladas dentro do container.
+  node_modules:
