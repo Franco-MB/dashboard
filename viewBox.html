@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    ```
+    <title>Laboratório viewBox</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .controles {
+            display: grid;
+            grid-template-columns: 80px 250px 50px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .area-svg {
+            width: 600px;
+            height: 400px;
+            border: 2px solid black;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .codigo {
+            margin-top: 20px;
+            padding: 15px;
+            background: #222;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 16px;
+        }
+    </style>
+    ```
+
+</head>
+
+<body>
+
+    ```
+    <h1>Laboratório de viewBox</h1>
+
+    <div class="controles">
+
+        <label>X:</label>
+        <input id="x" type="range" min="-100" max="300" value="0">
+        <span id="valorX">0</span>
+
+        <label>Y:</label>
+        <input id="y" type="range" min="-100" max="400" value="0">
+        <span id="valorY">0</span>
+
+        <label>Largura:</label>
+        <input id="largura" type="range" min="20" max="400" value="210">
+        <span id="valorLargura">210</span>
+
+        <label>Altura:</label>
+        <input id="altura" type="range" min="20" max="500" value="297">
+        <span id="valorAltura">297</span>
+
+    </div>
+
+
+    <div class="area-svg">
+
+        <svg id="meuSVG" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Retângulo externo -->
+            <rect x="5" y="5" width="200" height="287" fill="none" stroke="black" stroke-width="2" />
+
+            <!-- Círculo interno -->
+            <circle cx="105" cy="148.5" r="50" fill="none" stroke="red" stroke-width="2" />
+
+        </svg>
+
+    </div>
+
+
+    <div class="codigo">
+
+        viewBox="<span id="codigoX">0</span>
+        <span id="codigoY">0</span>
+        <span id="codigoLargura">210</span>
+        <span id="codigoAltura">297</span>"
+
+    </div>
+
+
+    <script>
+
+        const svg = document.getElementById("meuSVG");
+
+        const x = document.getElementById("x");
+        const y = document.getElementById("y");
+        const largura = document.getElementById("largura");
+        const altura = document.getElementById("altura");
+
+
+        function atualizarViewBox() {
+
+            const valorX = x.value;
+            const valorY = y.value;
+            const valorLargura = largura.value;
+            const valorAltura = altura.value;
+
+            svg.setAttribute(
+                "viewBox",
+                `${valorX} ${valorY} ${valorLargura} ${valorAltura}`
+            );
+
+            document.getElementById("valorX").textContent = valorX;
+            document.getElementById("valorY").textContent = valorY;
+            document.getElementById("valorLargura").textContent = valorLargura;
+            document.getElementById("valorAltura").textContent = valorAltura;
+
+            document.getElementById("codigoX").textContent = valorX;
+            document.getElementById("codigoY").textContent = valorY;
+            document.getElementById("codigoLargura").textContent = valorLargura;
+            document.getElementById("codigoAltura").textContent = valorAltura;
+        }
+
+
+        x.addEventListener("input", atualizarViewBox);
+        y.addEventListener("input", atualizarViewBox);
+        largura.addEventListener("input", atualizarViewBox);
+        altura.addEventListener("input", atualizarViewBox);
+
+    </script>
+    ```
+
+</body>
+
+</html>
