@@ -5,10 +5,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // =====================================================
-    // BOMBA E SETA
+    // BOMBA E SETA WIFI
     // =====================================================
     const bomba = document.getElementById("path8");
     const seta = document.getElementById("path1-0-8");
+    const indicador = document.getElementById("path121");
 
     // =====================================================
     // ELEMENTOS
@@ -348,13 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     iniciarCiclo();
 
-
-
-
-
-
-
-
+    indicador.classList.add("piscar");
 
 });
 
