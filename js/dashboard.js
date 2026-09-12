@@ -5,9 +5,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // =====================================================
-    // BOMBA
+    // BOMBA E SETA
     // =====================================================
     const bomba = document.getElementById("path8");
+    const seta = document.getElementById("path1-0-8");
 
     // =====================================================
     // ELEMENTOS
@@ -153,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =====================================================
-    // ATUALIZA BOMBA
+    // ATUALIZA BOMBA E SETA
     // =====================================================
     function atualizarBomba() {
 
@@ -171,6 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "girar",
             estado.bomba
         );
+        seta.classList.toggle(
+            "subir",
+            estado.bomba);
     }
 
 
@@ -351,7 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-   
+
 });
 
 
