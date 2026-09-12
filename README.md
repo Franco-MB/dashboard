@@ -46,19 +46,18 @@ Atualmente a interface possui:
              │            │            │
              └────────────┼────────────┘
                           │
-                         SVG
                           │
                        Docker
                           │
                    ┌──────┴──────┐
                    ▼             ▼
-                  PC       Smartphone
+                  PC         Smartphone
                           │
                           ▼
                     TESTE DA UI
                           │
                           ▼
-                    Node-RED
+                     Node-RED
                           │
                      ui-template
                           │
@@ -71,20 +70,6 @@ O Node-RED é tratado como **destino de implantação e integração**, não com
 
 
 A separação entre HTML, CSS e JavaScript deve ser mantida durante o desenvolvimento.
-
-## Tecnologias
-
-- HTML5
-- CSS3
-- JavaScript
-- SVG
-- Vite
-- Node.js
-- Docker
-- Node-RED Dashboard 2.0 — implantação futura
-- MQTT — integração em andamento
-
-Não são utilizados frameworks de interface como React, Vue ou Angular.
 
 ## Ambiente de desenvolvimento
 
@@ -220,7 +205,7 @@ A integração MQTT também será incorporada posteriormente.
 
 O layout gráfico do sistema foi desenvolvido no **Inkscape**, utilizando SVG como formato principal da interface.
 
-[Inkscape](https://github.com/inkscape) é utilizado para criar e editar o desenho hidráulico, permitindo trabalhar diretamente com os elementos gráficos que posteriormente são manipulados pelo CSS e JavaScript.
+Inkscape é utilizado para criar e editar o desenho hidráulico, permitindo trabalhar diretamente com os elementos gráficos que posteriormente são manipulados pelo CSS e JavaScript.
 
 O projeto utiliza um SVG de grandes dimensões. Durante os testes no Node-RED, foi adotado o layout `Fixed` para o grupo que contém o desenho, por apresentar comportamento mais previsível para esse tipo de conteúdo.
 
