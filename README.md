@@ -4,7 +4,7 @@
 ![Versão](https://img.shields.io/badge/version-1.0.0-green)
 ![Licença](https://img.shields.io/badge/license-MIT-yellow)
 
-Ambiente de desenvolvimento independente para a interface visual de uma dashboard IoT destinada ao monitoramento de um sistema de abastecimento de água.
+Ambiente de desenvolvimento independente para minha interface visual de uma dashboard IoT destinada ao monitoramento de um sistema de abastecimento de água.
 
 A interface é desenvolvida separadamente do Node-RED utilizando **HTML, CSS, JavaScript, SVG e Vite**, permitindo testar rapidamente o projeto no PC e no smartphone antes da implantação no `ui-template`.
 
