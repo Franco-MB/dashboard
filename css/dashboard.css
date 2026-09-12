@@ -1,0 +1,213 @@
+/* =========================================================
+   APENAS PARA TER UMA NOÇÃO DO ESPAÇO OCUPADO NA TELA
+   ========================================================= */
+
+#contorno {
+    fill: rgb(51, 255, 0);
+    stroke: #ED1C24;
+    stroke-width: 0.5;
+    stroke-dasharray: 213 0.5;
+    stroke-dashoffset: 10;
+}
+
+
+/* =========================================================
+   SVG
+   ========================================================= */
+
+svg {
+    /*width: min(1000px, 100%);*/
+    width: min(5000px, 500%);
+    height: auto;
+    display: block;
+}
+
+
+/* =========================================================
+   MOVIMENTANDO A HÉLICE DA BOMBA
+   ========================================================= */
+
+#path8 {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+#path8.girar {
+    animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   MOVIMENTANDO A SETA
+   ========================================================= */
+
+#path1-0-8 {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+#path1-0-8.subir {
+    animation: subir 2s linear infinite;
+}
+
+@keyframes subir {
+
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    75% {
+        transform: translateY(-40px);
+        opacity: 1;
+    }
+
+    85% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    86% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================================
+   SENSORES
+   ========================================================= */
+
+/*
+   Estado normal:
+   branco
+*/
+
+#g1 path,
+#g2 path,
+#g3 path,
+#g4 path,
+#g5 path {
+    fill: #fdfefd !important;
+}
+
+
+/*
+   Estado ativo:
+   verde
+*/
+
+#g1.vermelho path,
+#g2.vermelho path,
+#g3.vermelho path,
+#g4.vermelho path,
+#g5.vermelho path {
+    fill: #25ee22 !important;
+}
+
+
+/* =========================================================
+   NÍVEL DA CAIXA D'ÁGUA
+   ========================================================= */
+
+/*
+   Por padrão, todos os níveis ficam escondidos.
+*/
+
+#path43,
+#path43-2,
+#path43-4,
+#path43-9 {
+    display: none !important;
+}
+
+
+/* =========================================================
+   NÍVEL DA CAIXA - SENSOR
+   ========================================================= */
+
+/*
+   S3 OFF
+   S4 OFF
+   S5 OFF
+
+   Caixa vazia
+*/
+
+.tanque-nivel-0 #path43-2 {
+    display: inline !important;
+}
+
+.tanque-nivel-1 #path43-9 {
+    display: inline !important;
+}
+
+.tanque-nivel-2 #path43-4 {
+    display: inline !important;
+}
+
+.tanque-nivel-3 #path43 {
+    display: inline !important;
+}
+
+
+/* =========================================================
+   NÍVEL DA CISTERNA
+   ========================================================= */
+
+/*   Por padrão, os níveis visuais ficam escondidos.*/
+
+#path37-4-9-3,
+#path37-4-9 {
+    display: none !important;
+}
+
+/* Nível intermediário — S1 detectando água */
+.cisterna-nivel-1 #path37-4-9 {
+    display: inline !important;
+}
+
+/* Nível cheio — S1 e S2 detectando água */
+.cisterna-nivel-2 #path37-4-9-3 {
+    display: inline !important;
+}
+
+
+/* =========================================================
+   BOMBA PARADA
+   ========================================================= */
+
+#path8 {
+    animation: none;
+}
+
+
+/* =========================================================
+   FUNCIONAMENTO NO UI-TEMPLATE
+   =========================================================
+
+   Mantido porque este CSS também será reutilizado
+   futuramente no Node-RED.
+*/
+
+.nrdb-ui-widget.nrdb-ui-template {
+    overflow: hidden !important;
+}
